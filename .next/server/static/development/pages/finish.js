@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,8 +112,129 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/Users/Gess/Desktop/caicsignup/pages/finish.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
+
+let sharedTranslatorInstance = null;
+
+class Translator {
+  constructor() {
+    _defineProperty(this, "_package", null);
+
+    _defineProperty(this, "_ko", null);
+
+    _defineProperty(this, "_jp", null);
+
+    _defineProperty(this, "_zh", null);
+
+    _defineProperty(this, "_en", null);
+
+    this.ko = {
+      "country": "국가",
+      "cellphone": "휴대 전화",
+      "sendcode": "인증 코드를 보내",
+      "sendcodeok": "인증 코드를 성공적으로 전송",
+      "userinfo": "기본정보",
+      "verificationcode": "확인 코드",
+      "username": "아이디",
+      "password": "비밀번호",
+      "invitationcode": "초대코드",
+      "register": "회원가입",
+      "signUpSuccessfully": "성공적으로 가입",
+      "downloadWallet": "CAIC 지갑을 다운로드하려면 클릭하십시오",
+      "phoneformatwrong": "전화 번호 형식이 잘못되었습니다",
+      "passwordatleast8": "비밀번호 길이는 6 이상이어야합니다",
+      "cannotregister": "지금 등록 할 수 없습니다",
+      "phoneexist": "전화 번호가 이미 존재합니다"
+    };
+    this.en = {
+      "country": "Country",
+      "cellphone": "Cell Phone",
+      "sendcode": "Send Verification Code",
+      "sendcodeok": "",
+      "userinfo": "User information",
+      "verificationcode": "Verification Code",
+      "username": "User Name",
+      "password": "Password",
+      "invitationcode": "Invitation Code",
+      "register": "Register",
+      "signUpSuccessfully": "Sign Up Successfully",
+      "downloadWallet": "Click here to download latest CAIC wallet",
+      "phoneformatwrong": "Phone number format is wrong!",
+      "passwordatleast8": "Password length should be at leaset 6",
+      "cannotregister": "Cannot register for now!",
+      "phoneexist": "Phone number already exsited!"
+    };
+    this.zh = {
+      "country": "国家",
+      "cellphone": "电话号码",
+      "sendcode": "发送验证码",
+      "sendcodeok": "",
+      "userinfo": "用户信息",
+      "verificationcode": "手机验证码",
+      "username": "用户名",
+      "password": "密码",
+      "invitationcode": "邀请码",
+      "register": "注册",
+      "signUpSuccessfully": "注册成功",
+      "downloadWallet": "点击下载最新版本CAIC钱包",
+      "phoneformatwrong": "手机格式有误！",
+      "passwordatleast8": "密码长度至少为6位",
+      "cannotregister": "无法处理注册请求！",
+      "phoneexist": "该手机号已经注册过！"
+    };
+    this.jp = {
+      "country": "国",
+      "cellphone": "電話番号",
+      "sendcode": "確認コードを送信",
+      "sendcodeok": "確認コードを正常に送信します",
+      "userinfo": "基本情報",
+      "verificationcode": "電話確認コード",
+      "username": "ユーザ名",
+      "password": "パスワード",
+      "invitationcode": "招待コード",
+      "register": "新規登録",
+      "signUpSuccessfully": "正常に登録する",
+      "downloadWallet": "クリックしてCAICウォレットをダウンロード",
+      "phoneformatwrong": "電話の形式が間違っています！",
+      "passwordatleast8": "最小文字数は6です。もう一度入力してください",
+      "cannotregister": "サインアップできません！",
+      "phoneexist": "電話番号はすでに存在しています！"
+    };
+    this._package = this.en;
+  }
+
+  static sharedTranslator() {
+    if (sharedTranslatorInstance === null) {
+      sharedTranslatorInstance = new Translator();
+    }
+
+    return sharedTranslatorInstance;
+  }
+
+  setPackage(lang) {
+    if (lang === "ko") {
+      this._package = this.ko;
+    } else if (lang === "jp") {
+      this._package = this.jp;
+    } else if (lang === "zh") {
+      this._package = this.zh;
+    } else {
+      this._package = this.en;
+    }
+  }
+
+  getT(oStr) {
+    if (this._package.hasOwnProperty(oStr)) {
+      return this._package[oStr];
+    } else {
+      return oStr;
+    }
+  }
+
+}
 
 class Welcome extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   constructor(props) {
@@ -122,39 +243,49 @@ class Welcome extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   }
 
   onClick(e) {
-    window.location = "https://baidu.com";
+    window.location = "http://caicdownload.s3-website-ap-northeast-1.amazonaws.com/";
+  }
+
+  componentDidMount() {
+    let urlPath = window.location.search; //alert(urlPath);
+
+    let components = urlPath.split("=");
+
+    if (components.length > 1) {
+      Translator.sharedTranslator().setPackage(components[1]);
+    }
   }
 
   render() {
     return __jsx("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 22
+        lineNumber: 155
       },
       __self: this
     }, __jsx("div", {
       className: "Register",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23
+        lineNumber: 156
       },
       __self: this
     }, __jsx("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24
+        lineNumber: 157
       },
       __self: this
-    }, "Sign up successfully!"), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }, Translator.sharedTranslator().getT("signUpSuccessfully")), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       color: "success",
       size: "lg",
       onClick: this.onClick,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 159
       },
       __self: this
-    }, "Click here to download lastest CAIC wallet")));
+    }, Translator.sharedTranslator().getT("downloadWallet"))));
   }
 
 }
@@ -169,19 +300,19 @@ class Finish extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
     return __jsx("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 180
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_0___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 181
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 182
       },
       __self: this
     }, "CAIC"), __jsx("link", {
@@ -189,7 +320,7 @@ class Finish extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       rel: "stylesheet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 183
       },
       __self: this
     }), __jsx("link", {
@@ -197,13 +328,13 @@ class Finish extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       rel: "stylesheet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51
+        lineNumber: 184
       },
       __self: this
     })), __jsx(Welcome, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54
+        lineNumber: 187
       },
       __self: this
     }));
@@ -214,7 +345,7 @@ class Finish extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!*******************************!*\
   !*** multi ./pages/finish.js ***!
   \*******************************/
