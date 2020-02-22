@@ -174,7 +174,7 @@ class Register extends React.Component {
 
       if(codeStr === 8) {
         this.setState({
-          invitation_code:  components[1]
+          invitation_code:  codeStr
         })
       }
     }
