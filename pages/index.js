@@ -166,13 +166,17 @@ class Register extends React.Component {
   componentDidMount() {
     let urlPath = window.location.search;
 
-    let components = urlPath.split("=");
-    
-    if(components.length > 1) {
 
-      this.setState({
-        invitation_code:  components[1]
-      })
+    if(urlPath.indexOf("invitation") >= 0) {
+      let invIndex = urlPath.indexOf("invitation");
+      let codeStart = invIndex + 11;
+      let codeStr = urlPath.substr(codeStart, 8);
+
+      if(codeStr === 8) {
+        this.setState({
+          invitation_code:  components[1]
+        })
+      }
     }
   }
   
@@ -205,7 +209,7 @@ class Register extends React.Component {
     } else {
       Translator.sharedTranslator().setPackage("en");
       this.setState({
-        country: "jp"
+        country: "en"
       })
     }
     
@@ -239,8 +243,6 @@ class Register extends React.Component {
         if(resBody.code === 5009) {
           alert(Translator.sharedTranslator().getT("phoneexist"))
         } else if(resBody.code === 0) {
-
-          alert(Translator.sharedTranslator().getT("sendcodeok"))
 
           window.location.href = "/signup?invitation=" + this.state.invitation_code 
           + "&preMobile=" + this.state.preMobile + "&mobile=" + this.state.mobile 

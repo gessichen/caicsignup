@@ -153,7 +153,7 @@ class Translator {
       "country": "Country",
       "cellphone": "Cell Phone",
       "sendcode": "Send Verification Code",
-      "sendcodeok": "",
+      "sendcodeok": "Send verification code successfully",
       "userinfo": "User information",
       "verificationcode": "Verification Code",
       "username": "User Name",
@@ -171,7 +171,7 @@ class Translator {
       "country": "国家",
       "cellphone": "电话号码",
       "sendcode": "发送验证码",
-      "sendcodeok": "",
+      "sendcodeok": "验证码发送成功",
       "userinfo": "用户信息",
       "verificationcode": "手机验证码",
       "username": "用户名",
@@ -311,12 +311,17 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
 
   componentDidMount() {
     let urlPath = window.location.search;
-    let components = urlPath.split("=");
 
-    if (components.length > 1) {
-      this.setState({
-        invitation_code: components[1]
-      });
+    if (urlPath.indexOf("invitation") >= 0) {
+      let invIndex = urlPath.indexOf("invitation");
+      let codeStart = invIndex + 11;
+      let codeStr = urlPath.substr(codeStart, 8);
+
+      if (codeStr === 8) {
+        this.setState({
+          invitation_code: components[1]
+        });
+      }
     }
   }
 
@@ -350,7 +355,7 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
     } else {
       Translator.sharedTranslator().setPackage("en");
       this.setState({
-        country: "jp"
+        country: "en"
       });
     }
   }
@@ -379,7 +384,6 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
         if (resBody.code === 5009) {
           alert(Translator.sharedTranslator().getT("phoneexist"));
         } else if (resBody.code === 0) {
-          alert(Translator.sharedTranslator().getT("sendcodeok"));
           window.location.href = "/signup?invitation=" + this.state.invitation_code + "&preMobile=" + this.state.preMobile + "&mobile=" + this.state.mobile + "&lang=" + this.state.country;
         } else {
           alert(Translator.sharedTranslator().getT("cannotregister"));
@@ -392,88 +396,88 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
     return __jsx("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 257
+        lineNumber: 259
       },
       __self: this
     }, __jsx("div", {
       className: "Register",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 258
+        lineNumber: 260
       },
       __self: this
     }, __jsx("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 259
+        lineNumber: 261
       },
       __self: this
     }, "CAIC"), __jsx("h4", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 260
+        lineNumber: 262
       },
       __self: this
     }, "Welcome to CAIC world"), __jsx("form", {
       onSubmit: this.submitForm,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 261
+        lineNumber: 263
       },
       __self: this
     }, __jsx("div", {
       className: "form-group",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 263
+        lineNumber: 265
       },
       __self: this
     }, __jsx("label", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 264
+        lineNumber: 266
       },
       __self: this
     }, Translator.sharedTranslator().getT("country")), __jsx("div", {
       className: "field input-lg",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 265
+        lineNumber: 267
       },
       __self: this
     }, __jsx("select", {
       onChange: this.onChangeCountry,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 266
+        lineNumber: 268
       },
       __self: this
     }, __jsx("option", {
       value: "",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 267
+        lineNumber: 269
       },
       __self: this
     }, "Select Country"), __jsx("option", {
       value: "+82",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 268
+        lineNumber: 270
       },
       __self: this
     }, "Korea"), __jsx("option", {
       value: "+81",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 269
+        lineNumber: 271
       },
       __self: this
     }, "Japan"), __jsx("option", {
       value: "+86",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 270
+        lineNumber: 272
       },
       __self: this
     }, "China")))), __jsx(TextInput, {
@@ -486,7 +490,7 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       errors: null,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 276
+        lineNumber: 278
       },
       __self: this
     }), __jsx("input", {
@@ -495,7 +499,7 @@ class Register extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       className: "btn btn-primary btn-lg",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 284
+        lineNumber: 286
       },
       __self: this
     }))));
@@ -514,19 +518,19 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
     return __jsx("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 307
+        lineNumber: 309
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_0___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 308
+        lineNumber: 310
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 309
+        lineNumber: 311
       },
       __self: this
     }, "CAIC"), __jsx("link", {
@@ -534,7 +538,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       rel: "stylesheet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 310
+        lineNumber: 312
       },
       __self: this
     }), __jsx("link", {
@@ -542,13 +546,13 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       rel: "stylesheet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 311
+        lineNumber: 313
       },
       __self: this
     })), __jsx(Register, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 314
+        lineNumber: 316
       },
       __self: this
     }));
