@@ -172,7 +172,7 @@ class Register extends React.Component {
       let codeStart = invIndex + 11;
       let codeStr = urlPath.substr(codeStart, 8);
 
-      if(codeStr === 8) {
+      if(codeStr.length === 8) {
         this.setState({
           invitation_code:  codeStr
         })
